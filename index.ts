@@ -2,29 +2,29 @@ const NB_COLUMNS: number = 7;
 const NB_ROWS: number = 6;
 
 
-let grilleHTML : HTMLElement = document.getElementById("grille")
-let grille : number[][] = []
+let HTMLGrid : HTMLElement = document.getElementById("grid")
+let grid : number[][] = []
 
 // Création de la grille HTML
 for (let i: number = 0 ; i < NB_ROWS ; i++) {
-  let colonne: HTMLElement = document.createElement("div");
-  colonne.classList.add("row")
+  let row: HTMLElement = document.createElement("div");
+  row.classList.add("row")
 
   for (let j: number = 0 ; j < NB_COLUMNS ; j++) {
-    let newDiv : HTMLElement = document.createElement("div");
-    newDiv.classList.add("cell");
+    let cell: HTMLElement = document.createElement("div");
+    cell.classList.add("cell");
 
-    colonne.appendChild(newDiv)
+    row.appendChild(cell)
   }
 
-  grilleHTML.appendChild(colonne)
+  HTMLGrid.appendChild(row)
 }
 
 for (let i: number = 0 ; i < NB_ROWS ; i++) {
-  grille.push([])
+  grid.push([])
   for (let j: number = 0 ; j < NB_COLUMNS ; j++) {
-    grille[i].push(0)
+    grid[i].push(0)
   }
 }
 
-console.log(grille)
+console.log(grid)
