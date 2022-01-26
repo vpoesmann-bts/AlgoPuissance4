@@ -14,6 +14,13 @@ for (let i: number = 0 ; i < NB_ROWS ; i++) {
     let cell: HTMLElement = document.createElement("div");
     cell.classList.add("cell");
 
+
+    cell.addEventListener("click", function(event) {
+      console.log(j)
+      grid[i][j] = 1
+      console.log(grid)
+      cell.classList.add("yellow");
+    })
     row.appendChild(cell)
   }
 
@@ -26,5 +33,6 @@ for (let i: number = 0 ; i < NB_ROWS ; i++) {
     grid[i].push(0)
   }
 }
+
 
 console.log(grid)
