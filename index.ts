@@ -1,7 +1,6 @@
 const NB_COLUMNS: number = 7;
 const NB_ROWS: number = 6;
 
-
 let HTMLGrid : HTMLElement = document.getElementById("grid")
 let grid : number[][] = []
 
@@ -14,12 +13,10 @@ for (let i: number = 0 ; i < NB_ROWS ; i++) {
     let cell: HTMLElement = document.createElement("div");
     cell.classList.add("cell");
 
+    cell.id = i + "," + j
 
     cell.addEventListener("click", function(event) {
-      console.log(j)
-      insertToken(j)
-      console.log(grid)
-      cell.classList.add("yellow");
+      playTurn(j)
     })
     row.appendChild(cell)
   }
@@ -38,11 +35,20 @@ function insertToken(column) {
   for (let i : number = 0 ; i < NB_ROWS - 1 ; i++) {
     if (grid[i+1][column] != 0) {
       grid[i][column] = 1
-      return;
+      return i;
     }
   }
 
   grid[NB_ROWS -1][column] = 1
+  return NB_ROWS -1
 }
 
-console.log(grid)
+function playTurn(insertedColumn) {
+  let insertedRow: number = insertToken(insertedColumn)
+  let targetedCell = getCellByCoordinates(insertedRow, insertedColumn)
+  targetedCell.classList.add("yellow");
+}
+
+function getCellByCoordinates(row, column) {
+  return document.getElementById(row + "," + column)
+}
