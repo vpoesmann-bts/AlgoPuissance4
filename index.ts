@@ -1,5 +1,8 @@
 const NB_COLUMNS: number = 7;
 const NB_ROWS: number = 6;
+const PLAYER_COLOR = ["yellow", "red"]
+
+let playerTurn: number = 1
 
 let HTMLGrid : HTMLElement = document.getElementById("grid")
 let grid : number[][] = []
@@ -32,23 +35,43 @@ for (let i: number = 0 ; i < NB_ROWS ; i++) {
 }
 
 function insertToken(column) {
+  if (grid[0][column] != 0) {
+    return -1
+  }
+
   for (let i : number = 0 ; i < NB_ROWS - 1 ; i++) {
     if (grid[i+1][column] != 0) {
-      grid[i][column] = 1
+      grid[i][column] = playerTurn
       return i;
     }
   }
 
-  grid[NB_ROWS -1][column] = 1
+  grid[NB_ROWS -1][column] = playerTurn
   return NB_ROWS -1
 }
 
 function playTurn(insertedColumn) {
   let insertedRow: number = insertToken(insertedColumn)
+
+  if (insertedRow == -1) {
+    return;
+  }
+
   let targetedCell = getCellByCoordinates(insertedRow, insertedColumn)
-  targetedCell.classList.add("yellow");
+  targetedCell.classList.remove("yellow", "red")
+  targetedCell.classList.add(PLAYER_COLOR[playerTurn - 1]);
+  changeTurn()
+  console.log(grid)
 }
 
 function getCellByCoordinates(row, column) {
   return document.getElementById(row + "," + column)
+}
+
+function changeTurn() {
+  if (playerTurn == 1) {
+    playerTurn = 2
+  } else {
+    playerTurn = 1
+  }
 }
