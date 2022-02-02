@@ -17,7 +17,7 @@ for (let i: number = 0 ; i < NB_ROWS ; i++) {
 
     cell.addEventListener("click", function(event) {
       console.log(j)
-      grid[i][j] = 1
+      insertToken(j)
       console.log(grid)
       cell.classList.add("yellow");
     })
@@ -34,5 +34,15 @@ for (let i: number = 0 ; i < NB_ROWS ; i++) {
   }
 }
 
+function insertToken(column) {
+  for (let i : number = 0 ; i < NB_ROWS - 1 ; i++) {
+    if (grid[i+1][column] != 0) {
+      grid[i][column] = 1
+      return;
+    }
+  }
+
+  grid[NB_ROWS -1][column] = 1
+}
 
 console.log(grid)
